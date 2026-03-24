@@ -21,10 +21,15 @@ npm-debug.log*
 package-lock.json
 yarn-debug.log*
 yarn-error.log*
+**/__snapshots__/**
+packages/excalidraw/fonts/ComicShanns/index.ts
+packages/excalidraw/fonts/Excalifont/index.ts
+packages/excalidraw/fonts/wasm
+packages/excalidraw/fonts/Xiaolai/index.ts
+packages/excalidraw/locales/percentages.json
 packages/excalidraw/types
 coverage
 dev-dist
 html
 meta*.json
 .claude
-yarn.lock
