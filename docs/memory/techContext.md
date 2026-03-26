@@ -33,6 +33,17 @@
 
 Залежності додатку (фрагмент): **Firebase** `11.3.1`, **Jotai** `2.11.0`, **Sentry** `@sentry/browser` `9.0.1`, **socket.io-client** `4.7.2` (`excalidraw-app/package.json`).
 
+## Інфраструктура / деплой
+
+- **Локальна розробка:** Vite dev server (`yarn start`) на `http://localhost:3000` (або порт з `VITE_APP_PORT`).
+- **Контейнеризація:** multi-stage `Dockerfile` (build → `nginx:1.27-alpine`), статика з `excalidraw-app/build`.
+- **Compose:** `docker-compose.yml` публікує `3000:80` для контейнера.
+
+## Конфігурація (env)
+
+- **Vite env:** як мінімум використовується `VITE_APP_PORT` для порту dev-сервера.
+- Продуктові інтеграції (Sentry/Firebase/Collab) очікують власні змінні середовища у `excalidraw-app` (точні назви залежать від налаштувань і мають бути описані в `.env*`/документації додатку, якщо вмикаються).
+
 ## Інструменти якості
 
 - **Тести:** Vitest, `environment: "jsdom"`, `setupFiles: ./setupTests.ts`, покриття з порогами (`vitest.config.mts`).
@@ -43,6 +54,7 @@
 
 | Команда | Що робить (за `scripts`) |
 |---------|--------------------------|
+| `yarn install` | встановлення залежностей для workspaces |
 | `yarn start` | `yarn --cwd ./excalidraw-app start` → залежності + `vite` |
 | `yarn build` | `yarn --cwd ./excalidraw-app build` (app build + `build:version`) |
 | `yarn build:packages` | послідовно `common`, `math`, `element`, `excalidraw` |
@@ -60,3 +72,9 @@
 ## Шляхи імпортів у dev
 
 - TypeScript **paths** у `tsconfig.json` і **такі самі alias** у Vite та Vitest для `@excalidraw/*` → вихідні файли в `packages/*/src` або `packages/excalidraw/`.
+
+## Details
+
+For detailed architecture → see `docs/technical/architecture.md`
+
+For domain glossary → see `docs/product/domain-glossary.md`
